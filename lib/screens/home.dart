@@ -1,3 +1,4 @@
+import 'package:fl_identity/themes/global_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -46,7 +47,7 @@ class _SegundaCapa extends StatelessWidget {
       padding: EdgeInsets.symmetric(vertical: 10),
       child: Text('Login', style: GoogleFonts.lato(
         fontWeight: FontWeight.bold,
-        color: Color(0xff2473FD),
+        color: GlobalTheme.primary_color,
         fontSize: 25
       ),),
       onPressed: (){
@@ -65,7 +66,7 @@ class _PrimerCapa extends StatelessWidget {
     return Container(
         width: double.infinity,
         height: double.infinity,
-        color: Color(0xff2473FD),
+        color: GlobalTheme.primary_color,
         child: Center(
           child: Text('S.P.P.S.', style: GoogleFonts.breeSerif(
     textStyle: Theme.of(context).textTheme.headline4,
