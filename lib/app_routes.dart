@@ -8,7 +8,7 @@ import 'package:fl_identity/screens/login.dart';
 
 class AppRoutes{
 
-  static const initialRoute = "detalle";
+  static const initialRoute = "home";
 
   static final optionsMenu = <MenuOptions> [
     MenuOptions(route: 'home', icon: Icons.home, name: "Home Screen", screen: HomeScreen()),

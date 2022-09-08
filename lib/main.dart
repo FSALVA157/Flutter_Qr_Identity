@@ -1,8 +1,11 @@
 import 'package:fl_identity/app_routes.dart';
+import 'package:fl_identity/providers/personal_services.dart';
 import 'package:fl_identity/themes/global_theme.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 void main() => runApp(MyApp());
+
 
 class MyApp extends StatelessWidget {
   @override
@@ -17,3 +20,7 @@ class MyApp extends StatelessWidget {
     );
   }
 }
+
+
+
+

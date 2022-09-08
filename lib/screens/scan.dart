@@ -1,4 +1,6 @@
+import 'package:fl_identity/providers/personal_services.dart';
 import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
+import 'package:provider/provider.dart';
 import 'package:stylish_dialog/stylish_dialog.dart';
 
 
@@ -15,21 +17,24 @@ class ScanScreen extends StatelessWidget {
     final pantalla = MediaQuery.of(context);
     Orientation orientation = pantalla.orientation;
 
-    return  Scaffold(
-      appBar: AppBar(
-          leading: Icon(Icons.keyboard_arrow_left_outlined),
-          centerTitle: true,
-          backgroundColor: GlobalTheme.primary_color,
-          title: Text('S.P.P.S.', style: GoogleFonts.sourceSansPro(
-            color: Colors.white,
-            fontWeight: FontWeight.bold,
-            fontSize: 25
-            ),),
+    return  ChangeNotifierProvider<PersonalServices>(
+      create: (context) => PersonalServices(),
+      child: Scaffold(
+        appBar: AppBar(
+            leading: Icon(Icons.keyboard_arrow_left_outlined),
+            centerTitle: true,
+            backgroundColor: GlobalTheme.primary_color,
+            title: Text('S.P.P.S.', style: GoogleFonts.sourceSansPro(
+              color: Colors.white,
+              fontWeight: FontWeight.bold,
+              fontSize: 25
+              ),),
+        ),
+        body: (orientation == Orientation.portrait)? 
+          _ColumnLayout(): _RowLayout(pantalla: pantalla),
+        floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+        floatingActionButton: _FloatingActionBarCode(),
       ),
-      body: (orientation == Orientation.portrait)? 
-        _ColumnLayout(): _RowLayout(pantalla: pantalla),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-      floatingActionButton: _FloatingActionBarCode(),
     );
   }
 }
@@ -41,13 +46,13 @@ class _FloatingActionBarCode extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return FloatingActionButton(
+    final watch = Provider.of<PersonalServices>(context);
+
+
+    return  FloatingActionButton(
       backgroundColor: Colors.amberAccent,
       child: Icon(Icons.qr_code, color: Colors.white, size: 50),
       onPressed: ()async{
-
-
-
           String barcodeScanRes;
         // Platform messages may fail, so we use a try/catch PlatformException.
         try {
@@ -62,6 +67,8 @@ class _FloatingActionBarCode extends StatelessWidget {
           }
             print('AQUI VA LA DATA');
             print(barcodeScanRes);
+            watch.getDataXLegajo('1356');
+            
           // List<String> array = barcodeScanRes.split('@');
           // if (array.length != 9) {
           //   return StylishDialog(
